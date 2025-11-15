@@ -6,10 +6,10 @@ import time
 from sklearn.metrics import accuracy_score
 
 # Import model definitions from the src/models package
-from src.models.logistic_regression import get_logistic_regression_model
-from src.models.svm import get_svm_model
-from src.models.random_forest import get_random_forest_model
-from src.models.xgboost_clf import get_xgboost_model
+from src.logistic_regression import get_logistic_regression_model
+from src.svm import get_svm_model
+from src.random_forest import get_random_forest_model
+from src.xgboost_clf import get_xgboost_model
 
 
 # -----------------------------------------
