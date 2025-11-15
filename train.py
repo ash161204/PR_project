@@ -29,15 +29,26 @@ LABEL_ENCODER_PATH = os.path.join(DATA_DIR, "label_encoder.pkl")
 
 
 # -----------------------------------------
-# DATA LOADING
+# DATA LOADING (MODIFIED SECTION)
 # -----------------------------------------
 try:
     X_train = np.load(X_TRAIN_PATH)
     X_test  = np.load(X_TEST_PATH)
     y_train = np.load(Y_TRAIN_PATH)
     y_test  = np.load(Y_TEST_PATH)
-    le = joblib.load(LABEL_ENCODER_PATH)
-    NUM_CLASSES = len(le.classes_)
+    
+    # ------------------------------------------------------------------
+    # FIX START: Load the dictionary and extract the LabelEncoder object
+    # The 'feature_extraction_and_prep.py' script saves the objects 
+    # as a dictionary: {'label_encoder': le, 'feature_scaler': scaler}
+    # ------------------------------------------------------------------
+    preprocessing_bundle = joblib.load(LABEL_ENCODER_PATH)
+    le = preprocessing_bundle['label_encoder'] # <--- EXTRACT THE LE OBJECT
+    # le is now the actual LabelEncoder object
+    NUM_CLASSES = len(le.classes_) 
+    # ------------------------------------------------------------------
+    # FIX END
+    # ------------------------------------------------------------------
     
     print(" Data loaded successfully from the 'data' folder!")
 
